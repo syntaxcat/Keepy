@@ -4,7 +4,7 @@ import NoteTxt from '@/components/NoteTxt.vue'
 import NoteImg from '@/components/NoteImg.vue'
 import NoteVideo from '@/components/NoteVideo.vue'
 import NoteTodos from '@/components/NoteTodos.vue'
-import type { Note, NoteType } from '@/types/note'
+import type { Note } from '@/types/note'
 import { showMsg } from '@/services/userMsg'
 const COLOR_OPTIONS = [
     'red',
