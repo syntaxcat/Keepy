@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 
-const props = defineProps<{
-    info: {
-        url: string;
-    };
-}>();
+// const _props = defineProps<{
+//     info: {
+//         url: string;
+//     };
+// }>();
+
+
+// const props = defineProps<{
+//   info: { url: string }
+// }>()
+
+defineProps<{ info: { url: string } }>()
 </script>
 
 <template>

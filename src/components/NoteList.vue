@@ -24,7 +24,9 @@ const pinnedNotes = computed(() => props.notes.filter(n => n.isPinned))
 const notPinnedNotes = computed(() => props.notes.filter(n => !n.isPinned))
 
 const forward = (event: string, ...args: any[]) => {
-    emit(event as any, ...args)
+    // emit(event as any, ...(args as any[]))
+    // emit(event as any, ...args)
+    emit(event as any, ...(args as [any]))
 }
 
 
@@ -47,15 +49,27 @@ onUpdated(() => {
         const pinnedEl = document.querySelector('.pinned-notes')
         const otherEl = document.querySelector('.other-notes')
 
+        // if (pinnedEl) {
+        //     new Isotope(pinnedEl, {
+        //         itemSelector: '.note-card',
+        //         masonry: { gutter: 15 },
+        //     })
+        // }
         if (pinnedEl) {
-            new Isotope(pinnedEl, {
+            new Isotope(pinnedEl as HTMLElement, {
                 itemSelector: '.note-card',
                 masonry: { gutter: 15 },
             })
         }
 
+        // if (otherEl) {
+        //     new Isotope(otherEl, {
+        //         itemSelector: '.note-card',
+        //         masonry: { gutter: 15 },
+        //     })
+        // }
         if (otherEl) {
-            new Isotope(otherEl, {
+            new Isotope(otherEl as HTMLElement, {
                 itemSelector: '.note-card',
                 masonry: { gutter: 15 },
             })
@@ -86,7 +100,8 @@ onUpdated(() => {
             <ul class="notes-area other-notes">
                 <li v-for="note in notPinnedNotes" :key="note.id" class="note-card"
                     :class="note.style?.backgroundColor">
-                    <NotePreview :note="note" :color="note.style?.backgroundColor" @markCheckBox="forward('markCheckBox', $event, note.id)"
+                    <NotePreview :note="note" :color="note.style?.backgroundColor"
+                        @markCheckBox="forward('markCheckBox', $event, note.id)"
                         @changeTodo="forward('changeTodo', $event, note.id)"
                         @changeTxt="forward('changeTxt', $event, note.id)"
                         @changeTitle="forward('changeTitle', $event, note.id)" @pinNote="emit('pinNote', note.id)"
@@ -99,7 +114,6 @@ onUpdated(() => {
 </template>
 
 <style scoped>
-
 .notes-list {
     margin-top: 2rem;
 }

@@ -7,6 +7,8 @@ import type { Note } from '@/types/note'
 import { noteService } from '@/services/note-service'
 import { eventBus } from '@/services/event-bus-service'
 
+const findNoteById = (id: string) => notes.value.find((n) => n.id === id)
+
 
 const notes = ref<Note[]>([])
 const filterBy = ref<string | null>(null)
@@ -29,7 +31,7 @@ const deleteNote = async (id: string) => {
 }
 
 const updateColor = (color: string, id: string) => {
-    const note = notes.value.find((n) => n.id === id)
+    const note = findNoteById(id)
     if (!note) return
     note.style = { backgroundColor: color }
     noteService.updateNote(note)
@@ -55,7 +57,7 @@ const addNote = async (noteData: any) => {
 }
 
 const pinNote = async (id: string) => {
-    const note = notes.value.find((n) => n.id === id)
+    const note = findNoteById(id)
     if (!note) return
     note.isPinned = !note.isPinned
     await noteService.updateNote(note)
@@ -66,31 +68,31 @@ const changeTitle = (title: string, id: string) => {
     const note = notes.value.find((n) => n.id === id)
     if (!note) return
     note.titleTxt = title
-    noteService.updateNote(note)
+    noteService.updateNote(note) // ✅ Safe now
 }
 
 const changeTxt = (txt: string, id: string) => {
     const note = notes.value.find((n) => n.id === id)
     if (!note) return
     note.info.txt = txt
-    noteService.updateNote(note)
+    noteService.updateNote(note) // ✅ Safe now
 }
 
 const changeTodo = (content: string, todoId: string, noteId: string) => {
-    const note = notes.value.find((n) => n.id === noteId)
+    const note = findNoteById(noteId)
     const todo = note?.info.todos?.find((t: any) => t.id === todoId)
     if (todo) {
         todo.txt = content
-        noteService.updateNote(note)
+        noteService.updateNote(note!)
     }
 }
 
 const markCheckBox = (mark: boolean, todoId: string, noteId: string) => {
-    const note = notes.value.find((n) => n.id === noteId)
+    const note = findNoteById(noteId)
     const todo = note?.info.todos?.find((t: any) => t.id === todoId)
     if (todo) {
         todo.isDone = mark
-        noteService.updateNote(note)
+        noteService.updateNote(note!)
     }
 }
 
@@ -101,8 +103,8 @@ const notesToShow = computed(() => {
         const search = searchBy.value.toLowerCase()
         result = result.filter((note) => {
             if (note.titleTxt?.toLowerCase().includes(search)) return true
-            if (note.type === 'noteTxt') return note.info.txt?.toLowerCase().includes(search)
-            if (note.type === 'noteTodos') return note.info.todos?.some((t: any) => t.txt.toLowerCase().includes(search))
+            if (note.type === 'NoteTxt') return note.info.txt?.toLowerCase().includes(search)
+            if (note.type === 'NoteTodos') return note.info.todos?.some((t: any) => t.txt.toLowerCase().includes(search))
             return false
         })
     }
