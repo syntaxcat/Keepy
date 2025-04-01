@@ -37,11 +37,18 @@ const emit = defineEmits<{
     (e: 'markCheckBox', mark: boolean, todoId: string, noteId: string): void
 }>()
 
-const cmpMap: Record<NoteType, any> = {
-    NoteTxt,
-    NoteImg,
-    NoteVideo,
-    NoteTodos,
+// const cmpMap: Record<NoteType, any> = {
+//     NoteTxt,
+//     NoteImg,
+//     NoteVideo,
+//     NoteTodos,
+// }
+
+const cmpMap: Record<string, any> = {
+    'NoteTxt': NoteTxt,
+    'NoteImg': NoteImg,
+    'NoteVideo': NoteVideo,
+    'NoteTodos': NoteTodos,
 }
 
 // const title = ref(props.note.titleTxt)
