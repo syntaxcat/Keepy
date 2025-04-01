@@ -171,12 +171,10 @@ const markCheckBox = (mark: boolean, todoId: string) =>
 }
 
 .red {
-    /* background-color: #f28b82; */
     background-color: #f6e2dd;
 }
 
 .orange {
-    /* background-color: #fabc05; */
     background-color: #f39f76;
 }
 
@@ -186,44 +184,37 @@ const markCheckBox = (mark: boolean, todoId: string) =>
 }
 
 .green {
-    /* background-color: #cbff90; */
     background-color: #e2f6d3;
 }
 
 .teal {
-    /* background-color: #a7ffeb; */
     background-color: #b4ddd3;
 }
 
 .blue {
-    /* background-color: #caf0f8; */
     background-color: #aeccdc;
 }
 
 .purple {
-    /* background-color: #d7aefb; */
     background-color: #d3bfdb;
 }
 
 .pink {
-    /* background-color: #fdcfe8; */
     background-color: #faafa8;
 }
 
 .gray {
-    /* background-color: #e8eaed; */
     background-color: #efeff1;
 }
 
 .darkBlue {
-    /* background-color: #aecbfa; */
     background-color: #c3dafe;
 }
 
 .brown {
-    /* background-color: #e6c9a8; */
     background-color: #f0d8c0;
 }
+
 .note-preview {
     border-radius: 8px;
 }
