@@ -1,27 +1,24 @@
 <template>
-    <section class="note-txt">
-      <textarea
-      ref="textarea"
-      :value="props.info.txt"
-      @input="changeTxt"
-    ></textarea>
-    </section>
-  </template>
-  
-  <script setup lang="ts">
-  import { ref, watch, onMounted, defineProps, defineEmits } from 'vue'
+  <section class="note-txt">
+    <textarea ref="textarea" v-model="txt" @input="changeTxt"></textarea>
+  </section>
+</template>
+
+<script setup lang="ts">
+import { ref, watch, onMounted, defineProps, defineEmits } from 'vue'
 
 const props = defineProps<{ info: { txt: string } }>()
+const emit = defineEmits<{ (e: 'changeTxt', value: string): void }>()
 
-const emit = defineEmits<{
-  (e: 'changeTxt', value: string): void
-}>()
-
+const txt = ref(props.info.txt)
 const textarea = ref<HTMLTextAreaElement | null>(null)
 
-function changeTxt(event: Event) {
-  const val = (event.target as HTMLTextAreaElement).value
-  emit('changeTxt', val)
+watch(() => props.info.txt, newVal => {
+  txt.value = newVal
+})
+
+function changeTxt() {
+  emit('changeTxt', txt.value)
   updateHeight()
 }
 
@@ -35,19 +32,18 @@ onMounted(() => {
   updateHeight()
 })
 
-watch(
-  () => props.info.txt,
-  () => updateHeight()
-)
-  </script>
-  
-  <style scoped>
-  .note-txt textarea {
-    outline: none;
-    border: none;
-    background-color: transparent;
-    resize: none;
-    font-family: Arial;
-    width: 100%;
-  }
-  </style>
+watch(txt, () => {
+  updateHeight()
+})
+</script>
+
+<style scoped>
+.note-txt textarea {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  font-family: Arial;
+  width: 100%;
+}
+</style>
