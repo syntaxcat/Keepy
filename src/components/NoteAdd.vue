@@ -96,6 +96,9 @@ const placeholderByType = computed(() => {
         placeholder="Note title"
         :value="titleTxt"
         @input="(e) => titleTxt = (e.target as HTMLInputElement).value"
+        inputmode="text"
+        autocomplete="off"
+        spellcheck="false"
       />
       <input
         type="text"
@@ -103,6 +106,9 @@ const placeholderByType = computed(() => {
         :placeholder="placeholderByType"
         :value="info"
         @input="(e) => info = (e.target as HTMLInputElement).value"
+        inputmode="text"
+        autocomplete="off"
+        spellcheck="false"
       />
 
       <div class="actions-container">
@@ -177,6 +183,10 @@ const placeholderByType = computed(() => {
   height: 2rem;
   border: 0.5px solid gray;
   border-radius: 5px;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  transform: translateZ(0); /* trigger GPU */
+  touch-action: manipulation; /* fix tap delay */
   /* cursor: pointer; */
 }
 

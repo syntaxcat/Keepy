@@ -96,13 +96,14 @@ const changeTodo = (content: string, todoId: string) =>
 
 const markCheckBox = (mark: boolean, todoId: string) =>
     emit('markCheckBox', mark, todoId, props.note.id)
+
 </script>
 
 <template>
     <section class="note-preview" :class="note.style?.backgroundColor">
         <header>
             <!-- <input type="text" v-model="title" @input="changeTitle(title, note.id)"> -->
-            <input type="text" :value="props.note.titleTxt"
+            <input type="text" :value="props.note.titleTxt" 
                 @input="(e) => changeTitle((e.target as HTMLInputElement).value, note.id)">
             <button @click="pinNote(note.id)">
                 <img :src="pinIconSrc" alt="pin">

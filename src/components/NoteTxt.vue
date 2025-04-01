@@ -45,5 +45,9 @@ watch(txt, () => {
   resize: none;
   font-family: Arial;
   width: 100%;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  transform: translateZ(0); /* trigger GPU */
+  touch-action: manipulation; /* fix tap delay */
 }
 </style>

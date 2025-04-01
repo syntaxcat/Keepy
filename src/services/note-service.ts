@@ -108,18 +108,6 @@ function _createNotes(): Note[] {
       },
       {
         id: utilService.makeId(),
-        type: "NoteImg",
-        titleTxt: "Raccoon",
-        isPinned: true,
-        info: {
-          url: "https://media.istockphoto.com/photos/little-raccoon-on-tree-picture-id514622028?k=6&m=514622028&s=612x612&w=0&h=oa6bEuRd9EB_D72qJ5UD57dBfnLWz7onQDm6DFJSVLc=",
-        },
-        style: {
-          backgroundColor: "orange",
-        },
-      },
-      {
-        id: utilService.makeId(),
         type: "NoteTxt",
         titleTxt: "Umm....",
         isPinned: false,
@@ -180,18 +168,6 @@ function _createNotes(): Note[] {
         },
         style: {
           backgroundColor: "gray",
-        },
-      },
-      {
-        id: utilService.makeId(),
-        type: "NoteImg",
-        titleTxt: "Parrot buddy",
-        isPinned: false,
-        info: {
-          url: "https://lafeber.com/pet-birds/wp-content/uploads/2020/04/gamaliel-troubleson-u9PsLITXMCQ-unsplash-e1587001975887.jpg",
-        },
-        style: {
-          backgroundColor: "yellow",
         },
       },
       {
