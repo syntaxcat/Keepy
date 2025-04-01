@@ -91,7 +91,7 @@ function _createNotes(): Note[] {
           ],
         },
         style: {
-          backgroundColor: "orange",
+          backgroundColor: "purple",
         },
       },
       {
