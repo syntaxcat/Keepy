@@ -21,16 +21,6 @@ const COLOR_OPTIONS = [
 ] as const
 
 type ColorOption = typeof COLOR_OPTIONS[number]
-// type NoteType = 'NoteTxt' | 'NoteImg' | 'NoteVideo' | 'NoteTodos'
-
-// interface Note {
-//   id: string
-//   type: NoteType
-//   isPinned: boolean
-//   titleTxt: string
-//   info: any
-//   style?: { backgroundColor: string }
-// }
 
 const props = defineProps<{
     note: Note
@@ -48,20 +38,26 @@ const emit = defineEmits<{
 }>()
 
 const cmpMap: Record<NoteType, any> = {
-  NoteTxt,
-  NoteImg,
-  NoteVideo,
-  NoteTodos,
+    NoteTxt,
+    NoteImg,
+    NoteVideo,
+    NoteTodos,
 }
 
 const title = ref(props.note.titleTxt)
 const clickedColorPalette = ref(false)
 const colors = COLOR_OPTIONS
 
+// const pinIconSrc = computed(() =>
+//     props.note.isPinned
+//         ? '/src/assets/pin-full.svg'
+//         : '/src/assets/pin-empty.svg'
+// )
+
 const pinIconSrc = computed(() =>
     props.note.isPinned
-        ? '/src/assets/pin-full.svg'
-        : '/src/assets/pin-empty.svg'
+        ? new URL('@/assets/pin-full.svg', import.meta.url).href
+        : new URL('@/assets/pin-empty.svg', import.meta.url).href
 )
 
 // const removeNote = (noteId: string) => emit('noteRemoved', noteId)
@@ -82,7 +78,7 @@ const cloneNote = (noteId: string) => {
 }
 
 const pinNote = (noteId: string) => {
-    const isNowPinned = !props.note.isPinned 
+    const isNowPinned = !props.note.isPinned
     emit('pinNote', noteId)
     showMsg(`Note ${isNowPinned ? 'pinned' : 'unpinned'}`, 'info')
 }
