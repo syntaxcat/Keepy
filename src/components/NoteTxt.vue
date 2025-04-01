@@ -1,47 +1,44 @@
 <template>
     <section class="note-txt">
       <textarea
-        ref="textarea"
-        v-model="txt"
-        @input="changeTxt"
-      ></textarea>
+      ref="textarea"
+      :value="props.info.txt"
+      @input="changeTxt"
+    ></textarea>
     </section>
   </template>
   
   <script setup lang="ts">
-  import { ref, watch, onMounted, defineProps, defineEmits } from 'vue';
-  
-  const props = defineProps<{
-    info: {
-      txt: string;
-    };
-  }>();
-  
-  const emit = defineEmits<{
-    (e: 'changeTxt', value: string): void;
-  }>();
-  
-  const txt = ref(props.info.txt);
-  const textarea = ref<HTMLTextAreaElement | null>(null);
-  
-  function changeTxt() {
-    emit('changeTxt', txt.value);
-    updateHeight();
-  }
-  
-  function updateHeight() {
-    if (!textarea.value) return;
-    textarea.value.style.height = '0px';
-    textarea.value.style.height = textarea.value.scrollHeight + 'px';
-  }
-  
-  onMounted(() => {
-    updateHeight();
-  });
-  
-  watch(txt, () => {
-    updateHeight();
-  });
+  import { ref, watch, onMounted, defineProps, defineEmits } from 'vue'
+
+const props = defineProps<{ info: { txt: string } }>()
+
+const emit = defineEmits<{
+  (e: 'changeTxt', value: string): void
+}>()
+
+const textarea = ref<HTMLTextAreaElement | null>(null)
+
+function changeTxt(event: Event) {
+  const val = (event.target as HTMLTextAreaElement).value
+  emit('changeTxt', val)
+  updateHeight()
+}
+
+function updateHeight() {
+  if (!textarea.value) return
+  textarea.value.style.height = '0px'
+  textarea.value.style.height = textarea.value.scrollHeight + 'px'
+}
+
+onMounted(() => {
+  updateHeight()
+})
+
+watch(
+  () => props.info.txt,
+  () => updateHeight()
+)
   </script>
   
   <style scoped>

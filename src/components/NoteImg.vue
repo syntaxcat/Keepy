@@ -1,6 +1,7 @@
 <template>
     <section class="note-img">
-      <img :src="info.url" alt="" />
+      <!-- <img :src="info.url" alt="" /> -->
+      <img :src="info.url" alt="note image" />
     </section>
   </template>
   
@@ -18,6 +19,7 @@
 // }>()
 
 defineProps<{ info: { url: string } }>()
+
   </script>
   
   <style scoped>
