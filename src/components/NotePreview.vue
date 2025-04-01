@@ -103,8 +103,14 @@ const markCheckBox = (mark: boolean, todoId: string) =>
         </header>
 
         <div class="mainCmp">
-            <component :is="cmpMap[note.type]" :info="note.info" @markCheckBox="markCheckBox" @changeTodo="changeTodo"
-                @changeTxt="changeTxt($event, note.id)" />
+            <!-- <component :is="cmpMap[note.type]" :info="note.info" @markCheckBox="markCheckBox" @changeTodo="changeTodo"
+                @changeTxt="changeTxt($event, note.id)" /> -->
+
+            <component v-if="cmpMap[note.type]" :is="cmpMap[note.type]" :info="note.info" @markCheckBox="markCheckBox"
+                @changeTodo="changeTodo" @changeTxt="changeTxt($event, note.id)" />
+            <div v-else>
+                <p style="color: red">Unknown type: {{ note.type }}</p>
+            </div>
         </div>
 
         <div class="actions">
