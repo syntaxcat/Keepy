@@ -44,7 +44,7 @@ const cmpMap: Record<NoteType, any> = {
     NoteTodos,
 }
 
-const title = ref(props.note.titleTxt)
+// const title = ref(props.note.titleTxt)
 const clickedColorPalette = ref(false)
 const colors = COLOR_OPTIONS
 
@@ -94,7 +94,9 @@ const markCheckBox = (mark: boolean, todoId: string) =>
 <template>
     <section class="note-preview" :class="note.style?.backgroundColor">
         <header>
-            <input type="text" v-model="title" @input="changeTitle(title, note.id)">
+            <!-- <input type="text" v-model="title" @input="changeTitle(title, note.id)"> -->
+            <input type="text" :value="props.note.titleTxt"
+                @input="(e) => changeTitle((e.target as HTMLInputElement).value, note.id)">
             <button @click="pinNote(note.id)">
                 <img :src="pinIconSrc" alt="pin">
             </button>

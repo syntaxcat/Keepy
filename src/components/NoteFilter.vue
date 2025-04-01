@@ -40,9 +40,25 @@ const searchByKeyword = () => {
 </script>
 
 <template>
-    <section class="note-filter">
+    <!-- <section class="note-filter">
         <input type="text" v-model="searchKeyword" placeholder="Search" @input="searchByKeyword" />
         <select class="select" @change="setFilter" v-model="filterType">
+            <option v-for="option in options" :value="option.value">
+                {{ option.txt }}
+            </option>
+        </select>
+    </section> -->
+
+    <section class="note-filter">
+        <input type="text" :value="searchKeyword" placeholder="Search" @input="(e) => {
+            searchKeyword = (e.target as HTMLInputElement).value
+            searchByKeyword()
+        }" />
+
+        <select class="select" :value="filterType" @change="(e) => {
+            filterType = (e.target as HTMLSelectElement).value as FilterOption['value']
+            setFilter()
+        }">
             <option v-for="option in options" :value="option.value">
                 {{ option.txt }}
             </option>
@@ -51,7 +67,6 @@ const searchByKeyword = () => {
 </template>
 
 <style scoped>
-
 .note-filter {
     margin: 0 auto;
     margin-top: 2rem;
@@ -64,28 +79,28 @@ const searchByKeyword = () => {
     border-radius: 10px;
     transition: all 200ms;
     box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent,
-      0 2px 15px rgba(0, 0, 0, 0.3);
-  }
-  
-  .note-filter input {
+        0 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+.note-filter input {
     height: 2rem;
     border: 0.5px solid gray;
     border-radius: 5px;
-  }
-  
-  .note-filter select {
+}
+
+.note-filter select {
     border: 0.5px solid gray;
     border-radius: 5px;
-  }
+}
 
-  .note-filter input,
-  .note-filter select {
+.note-filter input,
+.note-filter select {
     padding: 0 0.5rem;
     height: 2rem;
     border: 0.5px solid gray;
     border-radius: 5px;
-  }
-  
+}
+
 
 
 

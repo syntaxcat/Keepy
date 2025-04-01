@@ -57,11 +57,53 @@ const placeholderByType = computed(() => {
 })
 </script>
 
-<template>
+<!-- <template>
   <section class="note-add">
     <form @submit.prevent="onAddNote">
       <input type="text" class="title" placeholder="Note title" v-model="titleTxt" />
       <input type="text" class="content" :placeholder="placeholderByType" v-model="info" />
+
+      <div class="actions-container">
+        <div class="add-actions">
+          <button type="button" @click="setType('NoteTxt')">
+            <img src="@/assets/bx-text.svg" alt="text" />
+          </button>
+          <button type="button" @click="setType('NoteImg')">
+            <img src="@/assets/bx-image.svg" alt="image" />
+          </button>
+          <button type="button" @click="setType('NoteVideo')">
+            <img src="@/assets/bxl-youtube.svg" alt="youtube" />
+          </button>
+          <button type="button" @click="setType('NoteTodos')">
+            <img src="@/assets/bx-list-ul.svg" alt="list" />
+          </button>
+        </div>
+
+        <button type="submit">
+          <img src="@/assets/bx-plus.svg" alt="plus" />
+        </button>
+      </div>
+    </form>
+  </section>
+</template> -->
+
+<template>
+  <section class="note-add">
+    <form @submit.prevent="onAddNote">
+      <input
+        type="text"
+        class="title"
+        placeholder="Note title"
+        :value="titleTxt"
+        @input="(e) => titleTxt = (e.target as HTMLInputElement).value"
+      />
+      <input
+        type="text"
+        class="content"
+        :placeholder="placeholderByType"
+        :value="info"
+        @input="(e) => info = (e.target as HTMLInputElement).value"
+      />
 
       <div class="actions-container">
         <div class="add-actions">
